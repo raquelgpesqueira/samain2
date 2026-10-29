@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samaín, Magosto y Noche de Ánimas en Madrid 2026</title>
+    <style>
+        :root {
+            --bg-color: #121318;
+            --card-bg: #1c1e24;
+            --sidebar-bg: #16181f;
+            --accent-orange: #e07a5f;
+            --accent-gold: #f4a261;
+            --text-main: #f4f1de;
+            --text-muted: #a0a5b5;
+            --border-color: #2e323e;
+            --tag-free: #2a9d8f;
+            --tag-paid: #e76f51;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        aside.sidebar {
+            width: 300px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            top: 0; bottom: 0; left: 0;
+            padding: 2rem 1rem;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        aside.sidebar h2 {
+            font-size: 1.05rem;
+            color: var(--accent-gold);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        aside.sidebar ul { list-style: none; }
+        aside.sidebar li { margin-bottom: 0.6rem; }
+        aside.sidebar a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.88rem;
+            display: block;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        aside.sidebar a:hover {
+            background-color: var(--card-bg);
+            color: var(--accent-orange);
+        }
+
+        main.content {
+            margin-left: 300px;
+            padding: 2.5rem 2.5rem;
+            flex: 1;
+            max-width: 1280px;
+        }
+
+        header.hero {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+
+        header.hero h1 { font-size: 2.2rem; color: var(--text-main); margin-bottom: 0.5rem; }
+        header.hero p { color: var(--text-muted); font-size: 1.05rem; }
+
+        .samain-hero-banner {
+            position: relative;
+            width: 100%;
+            height: 380px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+            border: 1px solid var(--accent-orange);
+            box-shadow: 0 8px 30px rgba(224, 122, 95, 0.25);
+            background-color: #0d0d12;
+        }
+
+        .samain-hero-banner video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        section.table-section { margin-bottom: 4rem; scroll-margin-top: 2rem; overflow-x: auto; }
+        section.table-section h2 { font-size: 1.5rem; color: var(--accent-gold); margin-bottom: 1.2rem; }
+
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 0.92rem;
+        }
+
+        table.data-table th, table.data-table td {
+            padding: 0.9rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        table.data-table th { background-color: #242730; color: var(--accent-gold); font-weight: 600; }
+        table.data-table tr:hover { background-color: #242732; }
+
+        .event-click-link { color: var(--text-main); text-decoration: none; font-weight: 600; transition: color 0.2s ease; }
+        .event-click-link:hover { color: var(--accent-orange); text-decoration: underline; }
+
+        .table-btn {
+            display: inline-block;
+            background-color: var(--accent-orange);
+            color: #fff;
+            text-decoration: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: background 0.2s ease;
+        }
+        .table-btn:hover { background-color: var(--accent-gold); }
+
+        .events-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+
+        article.event-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            scroll-margin-top: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .event-info h3 { font-size: 1.35rem; color: var(--accent-orange); margin-bottom: 0.5rem; }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .badge-free { background-color: rgba(42, 157, 143, 0.2); color: var(--tag-free); border: 1px solid var(--tag-free); }
+        .badge-paid { background-color: rgba(231, 111, 81, 0.2); color: var(--tag-paid); border: 1px solid var(--tag-paid); }
+
+        .meta-list {
+            list-style: none;
+            margin-bottom: 1.2rem;
+            background-color: #14151a;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.92rem;
+        }
+        .meta-list li { margin-bottom: 0.4rem; }
+        .meta-list strong { color: var(--accent-gold); }
+
+        .activities-title { font-size: 1rem; color: var(--text-main); margin-bottom: 0.5rem; font-weight: 600; }
+        .activities-list { margin-left: 1.2rem; color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.92rem; }
+
+        .btn-link {
+            display: inline-block;
+            background-color: var(--accent-orange);
+            color: #fff;
+            text-decoration: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+        .btn-link:hover { background-color: var(--accent-gold); }
+
+        .event-media {
+            width: 100%;
+            height: 300px;
+            background-color: #14151a;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .event-media img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+
+        @media (max-width: 992px) {
+            article.event-card { grid-template-columns: 1fr; }
+            .event-media { height: 250px; order: -1; }
+        }
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            aside.sidebar { position: relative; width: 100%; height: auto; }
+            main.content { margin-left: 0; padding: 1.5rem; }
+            .samain-hero-banner { height: 250px; }
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <h2>Índice de Eventos</h2>
+        <ul>
+            <li><a href="#tabla">📊 Tabla Comparativa Rápida</a></li>
+            <li><a href="#evento-1">01. Samhain: un portal entre dos mundos</a></li>
+            <li><a href="#evento-2">02. Halloween en Bibliotecas Públicas</a></li>
+            <li><a href="#evento-3">03. Leyendas y Tradiciones (Chapinería)</a></li>
+            <li><a href="#evento-4">04. Noche de Ánimas: Circo Maldito</a></li>
+            <li><a href="#evento-5">05. Jornadas Gastronómicas del Magosto</a></li>
+            <li><a href="#evento-6">06. Halloween Night: Area 51</a></li>
+            <li><a href="#evento-7">07. SAMA – The Halloween Experience</a></li>
+            <li><a href="#evento-8">08. Celtas, castaños y magosto</a></li>
+            <li><a href="#evento-9">09. Samaín Casero: Ritual en Casa</a></li>
+        </ul>
+    </aside>
+
+    <main class="content">
+        <header class="hero">
+            <h1>Samaín, Magosto y Noche de Ánimas</h1>
+            <p>Madrid — Sábado 31 de Octubre de 2026</p>
+        </header>
+
+        <!-- VÍDEO DE PORTADA: video_samain.mp4 -->
+        <div class="samain-hero-banner">
+            <video autoplay loop muted playsinline>
+                <source src="video_samain.mp4" type="video/mp4">
+                Tu navegador no soporta el formato de vídeo.
+            </video>
+        </div>
+
+        <section id="tabla" class="table-section">
+            <h2>Tabla Comparativa Rápida de Eventos</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Nº</th>
+                        <th>Evento</th>
+                        <th>Horario</th>
+                        <th>Precio</th>
+                        <th>Ubicación</th>
+                        <th>Sitio Web</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>01</td><td><a href="#evento-1" class="event-click-link">Samhain: un portal entre dos mundos</a></td><td>12:00–14:00 h / 17:00–21:00 h</td><td>Gratuito (0,60 €)</td><td>Gran Vía, 78</td><td><a href="https://www.nomadmuseo.es/" target="_blank" class="table-btn">Ver sitio</a></td></tr>
+                    <tr><td>02</td><td><a href="#evento-2" class="event-click-link">Halloween en Bibliotecas Públicas</a></td><td>Consultar centro</td><td>Gratuito</td><td>Carabanchel y Vallecas</td><td><a href="https://www.comunidad.madrid/portal-lector/actividad/120369" target="_blank" class="table-btn">Ver sitio</a></td></tr>
+                    <tr><td>03</td><td><a href="#evento-3" class="event-click-link">Leyendas y Tradiciones (Chapinería)</a></td><td>11:00 h</td><td>Gratuito</td><td>Chapinería</td><td><a href="https://www.instagram.com/turismochapineria/" target="_blank" class="table-btn">Ver sitio</a></td></tr>
+                    <tr><td>04</td><td><a href="#evento-4" class="event-click-link">Noche de Ánimas: Circo Maldito</a></td><td>20:00 h (Dom 1 Nov)</td><td>7,00 €</td><td>Villar del Olmo</td><td><a href="https://www.villardelolmo.es/actualidad/Noticias/noche-de-animas-2026---el-circo-maldito/" target="_blank" class="table-btn">Ver sitio</a></td></tr>
+                    <tr><td>05</td><td><a href="#evento-5" class="event-click-link">Jornadas Gastronómicas del Magosto</a></td><td>12:00–00:30 h</td><td>Según consumo</td><td>C/ Alcántara, 15</td><td><a href="https://www.laflordegalicia.es/blog/magosto-fiesta-castanas" target="_blank" class="table-btn">Ver sitio</a></td></tr>
+                    <tr><td>06</td><td><a href="#evento-6" class="event-click-link">Halloween Night: Area 51</a></td><td>22:00–05:00 h</td><td>Entrada libre</td><td>Av. de Brasil, 7</td><td><a href="https://www.theirishrover.com/agenda.php" target="_blank" class="table-btn">Ver sitio</a></td></tr>
+                    <tr><td>07</td><td><a href="#evento-7" class="event-click-link">SAMA – The Halloween Experience</a></td><td>23:00 h / 00:00 h</td><td>Desde 15,50 €</td><td>C/ Bailén, 16</td><td><a href="https://ticketrona.com/evento/sama-the-halloween-experience-en-madrid" target="_blank" class="table-btn">Ver sitio</a></td></tr>
+                    <tr><td>08</td><td><a href="#evento-8" class="event-click-link">Celtas, castaños y magosto</a></td><td>11:00–12:30 h (Dom 1 Nov)</td><td>Gratuito (Reserva)</td><td>El Escorial</td><td><a href="https://www.comunidad.madrid/actividades/2026/celtas-castanos-magosto" target="_blank" class="table-btn">Ver sitio</a></td></tr>
+                    <tr><td>09</td><td><a href="#evento-9" class="event-click-link">Samaín Casero: Ritual en Casa</a></td><td>A tu ritmo / Noche</td><td>Gratuito / Casero</td><td>Tu Hogar</td><td><a href="#evento-9" class="table-btn">Ver guía</a></td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="events-grid">
+            <article id="evento-1" class="event-card">
+                <div class="event-info">
+                    <span class="badge badge-free">Gratuito</span>
+                    <h3>01. Samhain: un portal entre dos mundos (NOMAD Museo Inmersivo)</h3>
+                    <ul class="meta-list">
+                        <li><strong>Día:</strong> Sábado 31 de octubre de 2026</li>
+                        <li><strong>Horario:</strong> 12:00–14:00 h / 17:00–21:00 h</li>
+                        <li><strong>Precio:</strong> Gratuito (reserva de 0,60 €)</li>
+                        <li><strong>Dirección:</strong> Calle Gran Vía, 78, Madrid</li>
+                    </ul>
+                    <a href="https://www.nomadmuseo.es/" target="_blank" class="btn-link">Ver Web Oficial</a>
+                </div>
+                <div class="event-media"><img src="1.nomad.png" alt="NOMAD Museo"></div>
+            </article>
+
+            <article id="evento-2" class="event-card">
+                <div class="event-info">
+                    <span class="badge badge-free">Gratuito</span>
+                    <h3>02. Halloween 2026 en las Bibliotecas Públicas</h3>
+                    <ul class="meta-list">
+                        <li><strong>Día:</strong> Sábado 31 de octubre de 2026</li>
+                        <li><strong>Horario:</strong> Consultar centro</li>
+                        <li><strong>Precio:</strong> Gratuito</li>
+                        <li><strong>Dirección:</strong> B.P. Luis Rosales y Miguel Hernández</li>
+                    </ul>
+                    <a href="https://www.comunidad.madrid/portal-lector/actividad/120369" target="_blank" class="btn-link">Ver Web Oficial</a>
+                </div>
+                <div class="event-media"><img src="2.biblios.png" alt="Bibliotecas Públicas"></div>
+            </article>
+
+            <article id="evento-3" class="event-card">
+                <div class="event-info">
+                    <span class="badge badge-free">Gratuito</span>
+                    <h3>03. Leyendas y Tradiciones de Halloween (Chapinería)</h3>
+                    <ul class="meta-list">
+                        <li><strong>Día:</strong> Sábado 31 de octubre de 2026</li>
+                        <li><strong>Horario:</strong> 11:00 h</li>
+                        <li><strong>Precio:</strong> Gratuito</li>
+                        <li><strong>Dirección:</strong> Oficina de Turismo de Chapinería</li>
+                    </ul>
+                    <a href="https://www.instagram.com/turismochapineria/" target="_blank" class="btn-link">Ver Instagram Oficial</a>
+                </div>
+                <div class="event-media"><img src="3. chapineria.png" alt="Chapinería"></div>
+            </article>
+
+            <article id="evento-4" class="event-card">
+                <div class="event-info">
+                    <span class="badge badge-paid">7,00 €</span>
+                    <h3>04. Noche de Ánimas: El Circo Maldito (Villar del Olmo)</h3>
+                    <ul class="meta-list">
+                        <li><strong>Día:</strong> Domingo 1 de noviembre de 2026</li>
+                        <li><strong>Horario:</strong> 20:00 h</li>
+                        <li><strong>Precio:</strong> 7,00 €</li>
+                        <li><strong>Dirección:</strong> Plaza Mayor, Villar del Olmo</li>
+                    </ul>
+                    <a href="https://www.villardelolmo.es/actualidad/Noticias/noche-de-animas-2026---el-circo-maldito/" target="_blank" class="btn-link">Ver Web Oficial</a>
+                </div>
+                <div class="event-media"><img src="4.villar del olmo.png" alt="Villar del Olmo"></div>
+            </article>
+
+            <article id="evento-5" class="event-card">
+                <div class="event-info">
+                    <span class="badge badge-paid">Según consumo</span>
+                    <h3>05. Jornadas Gastronómicas del Magosto (Restaurante Flor de Galicia)</h3>
+                    <ul class="meta-list">
+                        <li><strong>Día:</strong> Sábado 31 de octubre de 2026</li>
+                        <li><strong>Horario:</strong> 12:00 a 00:30 h</li>
+                        <li><strong>Precio:</strong> Según consumo</li>
+                        <li><strong>Dirección:</strong> Calle de Alcántara, 15, Madrid</li>
+                    </ul>
+                    <a href="https://www.laflordegalicia.es/blog/magosto-fiesta-castanas" target="_blank" class="btn-link">Ver Web Oficial</a>
+                </div>
+                <div class="event-media"><img src="5.flor de galicia.png" alt="Flor de Galicia"></div>
+            </article>
+
+            <article id="evento-6" class="event-card">
+                <div class="event-info">
+                    <span class="badge badge-free">Entrada Libre</span>
+                    <h3>06. Halloween Night: Area 51 (The Irish Rover)</h3>
+                    <ul class="meta-list">
+                        <li><strong>Día:</strong> Sábado 31 de octubre de 2026</li>
+                        <li><strong>Horario:</strong> A partir de las 22:00 h</li>
+                        <li><strong>Precio:</strong> Entrada libre</li>
+                        <li><strong>Dirección:</strong> Avenida de Brasil, 7, Madrid</li>
+                    </ul>
+                    <a href="https://www.theirishrover.com/agenda.php" target="_blank" class="btn-link">Ver Web Oficial</a>
+                </div>
+                <div class="event-media"><img src="6. irish rover area 51.png" alt="The Irish Rover"></div>
+            </article>
+
+            <article id="evento-7" class="event-card">
+                <div class="event-info">
+                    <span class="badge badge-paid">Desde 15,50 €</span>
+                    <h3>07. SAMA – The Halloween Experience (ContraClub)</h3>
+                    <ul class="meta-list">
+                        <li><strong>Día:</strong> Sábado 31 de octubre de 2026</li>
+                        <li><strong>Horario:</strong> 23:00 h hasta cierre</li>
+                        <li><strong>Precio:</strong> Desde 15,50 €</li>
+                        <li><strong>Dirección:</strong> Calle Bailén, 16, Madrid</li>
+                    </ul>
+                    <a href="https://ticketrona.com/evento/sama-the-halloween-experience-en-madrid" target="_blank" class="btn-link">Ver Entradas</a>
+                </div>
+                <div class="event-media"><img src="7 sama.png" alt="ContraClub SAMA"></div>
+            </article>
+
+            <article id="evento-8" class="event-card">
+                <div class="event-info">
+                    <span class="badge badge-free">Gratuito</span>
+                    <h3>08. Celtas, castaños y magosto (CEA Arboreto Luis Ceballos)</h3>
+                    <ul class="meta-list">
+                        <li><strong>Día:</strong> Domingo 1 de noviembre de 2026</li>
+                        <li><strong>Horario:</strong> 11:00 a 12:30 h</li>
+                        <li><strong>Precio:</strong> Gratuito (Reserva telefónica)</li>
+                        <li><strong>Dirección:</strong> Monte Abantos, San Lorenzo de El Escorial</li>
+                    </ul>
+                    <a href="https://www.comunidad.madrid/actividades/2026/celtas-castanos-magosto" target="_blank" class="btn-link">Ver Web Oficial</a>
+                </div>
+                <div class="event-media"><img src="8.el escorial.png" alt="Arboreto Luis Ceballos"></div>
+            </article>
+
+            <article id="evento-9" class="event-card">
+                <div class="event-info">
+                    <span class="badge badge-free">Casero</span>
+                    <h3>09. Samaín Casero: Celebra el Ritual en Casa</h3>
+                    <ul class="meta-list">
+                        <li><strong>Día:</strong> Sábado 31 de octubre de 2026</li>
+                        <li><strong>Horario:</strong> A tu ritmo</li>
+                        <li><strong>Precio:</strong> Gratuito / Casero</li>
+                        <li><strong>Dirección:</strong> En tu propio hogar</li>
+                    </ul>
+                    <a href="https://www.laflordegalicia.es/blog/magosto-fiesta-castanas" target="_blank" class="btn-link">Ver Guía de Queimada</a>
+                </div>
+                <div class="event-media"><img src="9. casero.png" alt="Samaín Casero"></div>
+            </article>
+        </section>
+    </main>
+</body>
+</html>
